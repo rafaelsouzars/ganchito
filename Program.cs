@@ -1,4 +1,5 @@
 ﻿using System;
+using ganchito.src.functions;
 
 namespace ganchito
 {
@@ -6,7 +7,8 @@ namespace ganchito
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Tela.Sobre("ganchito","v1.0.0","Utilitario para Git Hooks","https://github.com/rafasouzars","https://github.com/rafaelsouzars/ganchito");
+            Console.ReadLine();
         }
     }
 }
