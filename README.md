@@ -4,7 +4,7 @@
 
 Utilitario para modificação de git hooks
 
-### Notas da versã
+### Notas da versão
 - ```[ texto ]```
 
 ## Introdução
@@ -18,5 +18,7 @@ Utilitario para modificação de git hooks
 
 ----------------------------------
 <div align="center">
-[rafaelsouzars.github.io](https://rafaelsouza.github.io)
+
+#### [Github: rafaelsouzars](https://rafaelsouzars.github.io)
+
 </div>
