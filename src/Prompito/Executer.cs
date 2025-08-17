@@ -1,16 +1,12 @@
 ﻿/*
- *
- *   PROMPITO CLI
- *
- *   NAME: Executer.cs
- *
- *   VERSION: 1.0.0
- *
- *   DESCRIPTION: Esta classe é responsável por (...).
- *
- *   AUTHOR: Rafael Souza
- *
-*/
+ * 
+ * Ganchito
+ * Version: v1.0.0
+ * Description: Utilitário de git hooks
+ * Author: rafaelsouzars
+ * Github: https://github.com/rafaelsouzars
+ * 
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,19 +21,16 @@ using ganchito.Prompito.ActionCommands;
 
 namespace ganchito.Prompito
 {
-
+    /// <summary>
+    /// Class Executer(). Executa os commandos adicionados.
+    /// </summary>   
     class Executer : IExecuter
     {        
         private static object _appData;
         private static bool _DEBUG_MODE = false;
         private static Dictionary<string,(string,ActionCommand)> _receives = new Dictionary<string,(string, ActionCommand)>();
 
-        public bool DEBUG_MODE { get => _DEBUG_MODE; set { _DEBUG_MODE = value; } }
-
-        public Executer ()
-        {
-            
-        }
+        public bool DEBUG_MODE { get => _DEBUG_MODE; set { _DEBUG_MODE = value; } }       
         
 
         private static void DebugMode(string message)
@@ -48,12 +41,11 @@ namespace ganchito.Prompito
             }
         }
 
-        private void Init() 
-        {
-            var p = new Program();
-            this.AddCommand(p.ToString().Replace(".Program",""),"",new ActionGanchito());            
-        }
-
+        /// <summary>
+        /// O Método InsertAppData. Recebe um object com as informações da aplicação.
+        /// </summary>
+        /// <param name="appData">Tipo object</param>
+        /// <remarks>Exemplo: new { AppName = "", Version = "", Description = "", ProfileURL = "", RepositorieURL = "" }</remarks>
         public void InsertAppData(object appData)          
         {
             try
@@ -77,6 +69,10 @@ namespace ganchito.Prompito
             }
         }
 
+        /// <summary>
+        /// O Método ExecuteCommand. Recebe um array de argumentos, do Console, e repassa para o metodo Run() dos Commands.
+        /// </summary>
+        /// <param name="args">Array de argumentos repassa pelo console</param>        
         public void ExecuteCommand(string[] args) 
         {
             try 
@@ -106,16 +102,30 @@ namespace ganchito.Prompito
             
         }
 
+        /// <summary>
+        /// Método AddCommand. Adiciona um commando ao Executer
+        /// </summary>
+        /// <param name="commandName"></param>
+        /// <param name="newCommand"></param>        
         public void AddCommand(string commandName, ActionCommand newCommand)
         {
             _receives.Add(commandName, ("", newCommand));
         }
 
+        /// <summary>
+        /// Método AddCommand. Adiciona um commando ao Executer
+        /// </summary>
+        /// <param name="commandName"></param>
+        /// <param name="newCommand"></param> 
         public void AddCommand (string commandName , string description , ActionCommand newCommand) 
         {
             _receives.Add(commandName, ( description, newCommand ));
         }
 
+        /// <summary>
+        /// Método ScreenAbout. Ativa e desativa a tela do App.
+        /// </summary>
+        /// <param name="activeScreen"></param>        
         public void ScreenAbout (bool activeScreen) 
         {
             Screen.ActiveScreenLetter = activeScreen;
