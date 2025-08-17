@@ -1,26 +1,35 @@
-﻿using System;
+﻿/*
+ * 
+ * Ganchito
+ * Version: v1.0.0
+ * Description: Utilitário de git hooks
+ * Author: rafaelsouzars
+ * Github: https://github.com/rafaelsouzars
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ganchito.src.functions
+namespace ganchito.Prompito.ConsoleScreen
 {
-    class LetraConsole
+    class AppScreenLetter
     {
         public char Character { get; private set; }
         public int[,] Font { get; private set; }
 
-        // Lista de fontes estática na classe LetraConsole
-        private static List<LetraConsole> alfabeto = new List<LetraConsole>();
+        // Lista de fontes estática na classe AppScreenLetter
+        private static List<AppScreenLetter> alfabeto = new List<AppScreenLetter>();
 
-        public static void IniciarAlfabeto()
+        public static void Init()
         {
             // Populando a lista de fontes no construtor estático
             alfabeto = Alfabeto();
         }
 
-        public LetraConsole(char character, int[,] font)
+        public AppScreenLetter(char character, int[,] font)
         {
             Character = character;
             Font = font;
@@ -72,9 +81,9 @@ namespace ganchito.src.functions
             }
         }
 
-        private static List<LetraConsole> Alfabeto()
+        private static List<AppScreenLetter> Alfabeto()
         {
-            List<LetraConsole> alfabeto = new List<LetraConsole>();
+            List<AppScreenLetter> alfabeto = new List<AppScreenLetter>();
 
             // Representações em matriz para cada letra de "a" a "z" com array 5x5
             int[,] fontA = {
@@ -84,7 +93,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 1 }
         };
-            alfabeto.Add(new LetraConsole('a', fontA));
+            alfabeto.Add(new AppScreenLetter('a', fontA));
 
             int[,] fontB = {
             { 1, 1, 1, 1, 0 },
@@ -93,7 +102,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 1, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('b', fontB));
+            alfabeto.Add(new AppScreenLetter('b', fontB));
 
             int[,] fontC = {
             { 0, 1, 1, 1, 0 },
@@ -102,7 +111,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 0 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('c', fontC));
+            alfabeto.Add(new AppScreenLetter('c', fontC));
 
             int[,] fontD = {
             { 1, 1, 1, 1, 0 },
@@ -111,7 +120,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 1, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('d', fontD));
+            alfabeto.Add(new AppScreenLetter('d', fontD));
 
             int[,] fontE = {
             { 1, 1, 1, 1, 1 },
@@ -120,7 +129,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 0 },
             { 1, 1, 1, 1, 1 }
         };
-            alfabeto.Add(new LetraConsole('e', fontE));
+            alfabeto.Add(new AppScreenLetter('e', fontE));
 
             int[,] fontF = {
             { 1, 1, 1, 1, 1 },
@@ -129,7 +138,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 0 },
             { 1, 0, 0, 0, 0 }
         };
-            alfabeto.Add(new LetraConsole('f', fontF));
+            alfabeto.Add(new AppScreenLetter('f', fontF));
 
             int[,] fontG = {
             { 0, 1, 1, 1, 0 },
@@ -138,7 +147,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('g', fontG));
+            alfabeto.Add(new AppScreenLetter('g', fontG));
 
             int[,] fontH = {
             { 1, 0, 0, 0, 1 },
@@ -147,7 +156,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 1 }
         };
-            alfabeto.Add(new LetraConsole('h', fontH));
+            alfabeto.Add(new AppScreenLetter('h', fontH));
 
             int[,] fontI = {
             { 1, 1, 1, 1, 1 },
@@ -156,7 +165,7 @@ namespace ganchito.src.functions
             { 0, 1, 0, 1, 0 },
             { 1, 1, 1, 1, 1 }
         };
-            alfabeto.Add(new LetraConsole('i', fontI));
+            alfabeto.Add(new AppScreenLetter('i', fontI));
 
             int[,] fontJ = {
             { 0, 0, 0, 0, 1 },
@@ -165,7 +174,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('j', fontJ));
+            alfabeto.Add(new AppScreenLetter('j', fontJ));
 
             int[,] fontK = {
             { 1, 0, 0, 0, 1 },
@@ -174,7 +183,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 1, 0 },
             { 1, 0, 0, 0, 1 }
         };
-            alfabeto.Add(new LetraConsole('k', fontK));
+            alfabeto.Add(new AppScreenLetter('k', fontK));
 
             int[,] fontL = {
             { 1, 0, 0, 0, 0 },
@@ -183,7 +192,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 0 },
             { 1, 1, 1, 1, 1 }
         };
-            alfabeto.Add(new LetraConsole('l', fontL));
+            alfabeto.Add(new AppScreenLetter('l', fontL));
 
             int[,] fontM = {
             { 1, 0, 0, 0, 1 },
@@ -192,7 +201,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 1, 0, 0, 0, 1 }
         };
-            alfabeto.Add(new LetraConsole('m', fontM));
+            alfabeto.Add(new AppScreenLetter('m', fontM));
 
             int[,] fontN = {
             { 1, 0, 0, 0, 1 },
@@ -201,7 +210,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 1, 1 },
             { 1, 0, 0, 0, 1 }
         };
-            alfabeto.Add(new LetraConsole('n', fontN));
+            alfabeto.Add(new AppScreenLetter('n', fontN));
 
             int[,] fontO = {
             { 0, 1, 1, 1, 0 },
@@ -210,7 +219,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('o', fontO));
+            alfabeto.Add(new AppScreenLetter('o', fontO));
 
             int[,] fontP = {
             { 1, 1, 1, 1, 0 },
@@ -219,7 +228,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 0 },
             { 1, 0, 0, 0, 0 }
         };
-            alfabeto.Add(new LetraConsole('p', fontP));
+            alfabeto.Add(new AppScreenLetter('p', fontP));
 
             int[,] fontQ = {
             { 0, 1, 1, 1, 0 },
@@ -228,7 +237,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 1, 0 },
             { 0, 1, 1, 0, 1 }
         };
-            alfabeto.Add(new LetraConsole('q', fontQ));
+            alfabeto.Add(new AppScreenLetter('q', fontQ));
 
             int[,] fontR = {
             { 1, 1, 1, 1, 0 },
@@ -237,7 +246,7 @@ namespace ganchito.src.functions
             { 1, 0, 1, 0, 1 },
             { 1, 0, 0, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('r', fontR));
+            alfabeto.Add(new AppScreenLetter('r', fontR));
 
             int[,] fontS = {
             { 0, 1, 1, 1, 0 },
@@ -246,7 +255,7 @@ namespace ganchito.src.functions
             { 0, 0, 0, 0, 1 },
             { 1, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('s', fontS));
+            alfabeto.Add(new AppScreenLetter('s', fontS));
 
             int[,] fontT = {
             { 1, 1, 1, 1, 1 },
@@ -255,7 +264,7 @@ namespace ganchito.src.functions
             { 0, 0, 1, 0, 0 },
             { 0, 0, 1, 0, 0 }
         };
-            alfabeto.Add(new LetraConsole('t', fontT));
+            alfabeto.Add(new AppScreenLetter('t', fontT));
 
             int[,] fontU = {
             { 1, 0, 0, 0, 1 },
@@ -264,7 +273,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('u', fontU));
+            alfabeto.Add(new AppScreenLetter('u', fontU));
 
             int[,] fontV = {
             { 1, 0, 0, 0, 1 },
@@ -273,7 +282,7 @@ namespace ganchito.src.functions
             { 0, 1, 0, 1, 0 },
             { 0, 0, 1, 0, 0 }
         };
-            alfabeto.Add(new LetraConsole('v', fontV));
+            alfabeto.Add(new AppScreenLetter('v', fontV));
 
             int[,] fontW = {
             { 1, 0, 0, 0, 1 },
@@ -282,7 +291,7 @@ namespace ganchito.src.functions
             { 1, 1, 0, 1, 1 },
             { 1, 0, 0, 0, 1 }
         };
-            alfabeto.Add(new LetraConsole('w', fontW));
+            alfabeto.Add(new AppScreenLetter('w', fontW));
 
             int[,] fontX = {
             { 1, 0, 0, 0, 1 },
@@ -291,7 +300,7 @@ namespace ganchito.src.functions
             { 0, 1, 0, 1, 0 },
             { 1, 0, 0, 0, 1 }
         };
-            alfabeto.Add(new LetraConsole('x', fontX));
+            alfabeto.Add(new AppScreenLetter('x', fontX));
 
             int[,] fontY = {
             { 1, 0, 0, 0, 1 },
@@ -300,7 +309,7 @@ namespace ganchito.src.functions
             { 0, 0, 1, 0, 0 },
             { 0, 0, 1, 0, 0 }
         };
-            alfabeto.Add(new LetraConsole('y', fontY));
+            alfabeto.Add(new AppScreenLetter('y', fontY));
 
             int[,] fontZ = {
             { 1, 1, 1, 1, 1 },
@@ -309,7 +318,7 @@ namespace ganchito.src.functions
             { 0, 1, 0, 0, 0 },
             { 1, 1, 1, 1, 1 }
         };
-            alfabeto.Add(new LetraConsole('z', fontZ));
+            alfabeto.Add(new AppScreenLetter('z', fontZ));
 
             // Representações em matriz para os números de 0 a 9 com array 5x5
             int[,] font0 = {
@@ -319,7 +328,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('0', font0));
+            alfabeto.Add(new AppScreenLetter('0', font0));
 
             int[,] font1 = {
             { 0, 0, 1, 0, 0 },
@@ -328,7 +337,7 @@ namespace ganchito.src.functions
             { 0, 0, 1, 0, 0 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('1', font1));
+            alfabeto.Add(new AppScreenLetter('1', font1));
 
             int[,] font2 = {
             { 0, 1, 1, 1, 0 },
@@ -337,7 +346,7 @@ namespace ganchito.src.functions
             { 0, 1, 0, 0, 0 },
             { 1, 1, 1, 1, 1 }
         };
-            alfabeto.Add(new LetraConsole('2', font2));
+            alfabeto.Add(new AppScreenLetter('2', font2));
 
             int[,] font3 = {
             { 1, 1, 1, 1, 0 },
@@ -346,7 +355,7 @@ namespace ganchito.src.functions
             { 0, 0, 0, 0, 1 },
             { 1, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('3', font3));
+            alfabeto.Add(new AppScreenLetter('3', font3));
 
             int[,] font4 = {
             { 1, 0, 0, 1, 0 },
@@ -355,7 +364,7 @@ namespace ganchito.src.functions
             { 0, 0, 0, 1, 0 },
             { 0, 0, 0, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('4', font4));
+            alfabeto.Add(new AppScreenLetter('4', font4));
 
             int[,] font5 = {
             { 1, 1, 1, 1, 1 },
@@ -364,7 +373,7 @@ namespace ganchito.src.functions
             { 0, 0, 0, 0, 1 },
             { 1, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('5', font5));
+            alfabeto.Add(new AppScreenLetter('5', font5));
 
             int[,] font6 = {
             { 0, 1, 1, 1, 0 },
@@ -373,7 +382,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('6', font6));
+            alfabeto.Add(new AppScreenLetter('6', font6));
 
             int[,] font7 = {
             { 1, 1, 1, 1, 1 },
@@ -382,7 +391,7 @@ namespace ganchito.src.functions
             { 0, 0, 1, 0, 0 },
             { 0, 0, 1, 0, 0 }
         };
-            alfabeto.Add(new LetraConsole('7', font7));
+            alfabeto.Add(new AppScreenLetter('7', font7));
 
             int[,] font8 = {
             { 0, 1, 1, 1, 0 },
@@ -391,7 +400,7 @@ namespace ganchito.src.functions
             { 1, 0, 0, 0, 1 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('8', font8));
+            alfabeto.Add(new AppScreenLetter('8', font8));
 
             int[,] font9 = {
             { 0, 1, 1, 1, 0 },
@@ -400,14 +409,15 @@ namespace ganchito.src.functions
             { 0, 0, 0, 0, 1 },
             { 0, 1, 1, 1, 0 }
         };
-            alfabeto.Add(new LetraConsole('9', font9));
+            alfabeto.Add(new AppScreenLetter('9', font9));
 
             return alfabeto;
         }
 
-        public static List<LetraConsole> GetAlphabet()
+        public static List<AppScreenLetter> GetAlphabet()
         {
             return alfabeto;
         }
+
     }
 }
