@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ganchito.Prompito.Classes;
+using ganchito.src.Hooks.Classes;
 
 namespace ganchito.Prompito.ActionCommands
 {

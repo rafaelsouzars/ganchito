@@ -1,5 +1,4 @@
 ﻿using System;
-using ganchito.src.functions;
 using ganchito.Prompito;
 using ganchito.Prompito.ActionCommands;
 
@@ -11,7 +10,7 @@ namespace ganchito
         {         
             
             // CONCLUÍDO...
-            var app = new Executer();
+            var app = new Executer();           
 
             app.InsertAppData(
                 new {
@@ -20,15 +19,21 @@ namespace ganchito
                     Description = "Utilitário de Git Hook",
                     ProfileURL = "https://github.com/rafasouzars",
                     RepositorieURL = "https://github.com/rafaelsouzars/ganchito"
-                }); // 
+                });
 
             
             app.ScreenAbout(true);
 
             app.AddCommand(
-                "init",
+                "commit",
                 "Teste Filha inicia alguma coisa",
-                new ActionTeste()
+                new ActionGanchito()
+                );
+
+            app.AddCommand(
+                "help",
+                "Ajuda do Ganchito v1.0.0",
+                new ActionGanchitoHelper()
                 );
 
 

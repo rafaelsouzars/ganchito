@@ -25,53 +25,65 @@ namespace ganchito.Prompito.ConsoleScreen
 
                 Regex versionNumberRegex = new Regex(@"^v(\d\.){2,2}(\d)$");
                 Regex urlProfileRegex = new Regex(@"^(http|https)\:\/\/([a-z0-9]+)\.(github\.io|io|me|tech|cc|com|net)(\/[a-z0-9]+)?$");
-                Regex urlRepositorieRegex = new Regex(@"^(http|https)\:\/\/([a-z0-9]+)\.(github\.io|io|me|tech|cc|com|net)(\/[a-z0-9]+){2,2}$");                
-
-                // Verifica a inserção e valida o parametro 'versionNumber'.
-                if (!string.IsNullOrWhiteSpace(_appData.GetVersionNumber))
-                {
-                    if (!versionNumberRegex.IsMatch(_appData.GetVersionNumber))
-                    {
-                        throw new ArgumentException("A sintaxe do 'Numero de Versão' é inválida. Exemplo: 'v1.2.3'\nArgumento:", nameof(_appData.GetVersionNumber));
-                    }
-                }
-
-                // Verifica a inserção e valida o parametro 'urlProfile'
-                if (!string.IsNullOrWhiteSpace(_appData.GetDescription))
-                {
-
-                }
-
-                // Verifica a inserção e valida o parametro 'urlProfile'
-                if (!string.IsNullOrWhiteSpace(_appData.GetProfileURL))
-                {
-                    if (!urlProfileRegex.IsMatch(_appData.GetProfileURL))
-                    {
-                        throw new ArgumentException("A syntaxe de 'URL' é inválida", nameof(_appData.GetProfileURL));
-                    }
-                }
-
-                // Verifica a inserção e valida o parametro 'urlRepositorie'
-                if (!string.IsNullOrWhiteSpace(_appData.GetRepositorieURL))
-                {
-                    if (!urlRepositorieRegex.IsMatch(_appData.GetRepositorieURL))
-                    {
-                        throw new ArgumentException("A syntaxe de 'URL' é inválida", nameof(_appData.GetRepositorieURL));
-                    }
-                }
+                Regex urlRepositorieRegex = new Regex(@"^(http|https)\:\/\/([a-z0-9]+)\.(github\.io|io|me|tech|cc|com|net)(\/[a-z0-9]+){2,2}$");
 
                 AppScreenLetter.Init();
 
                 if (ActiveScreenLetter) 
                 {
-                    AppScreenLetter.DrawString($"{_appData.GetAppName}");
+                    Console.WriteLine("");
+                    AppScreenLetter.DrawString($" {_appData.GetAppName}");
                     Console.WriteLine("----------------------------------------------------------------------------");
-                    Console.WriteLine($"{_appData.GetAppName}");
-                    Console.WriteLine($"{_appData.GetVersionNumber}");
-                    Console.WriteLine($"Dev: {_appData.GetProfileURL}");
-                    Console.WriteLine($"Repositório: {_appData.GetRepositorieURL}");
-                    Console.WriteLine("-----------------------------------------------------------------------------");
+
+                    // Verifica a inserção e valida o parametro 'appName'.
+                    if (!string.IsNullOrWhiteSpace(_appData.GetAppName))
+                    {                        
+                        Console.WriteLine($" {_appData.GetAppName}");
+                    }
+
+                    // Verifica a inserção e valida o parametro 'versionNumber'.
+                    if (!string.IsNullOrWhiteSpace(_appData.GetVersionNumber))
+                    {
+                        Console.WriteLine($" Version: {_appData.GetVersionNumber}");                                               
+                    }
+
+                    // Verifica a inserção e valida o parametro 'urlProfile'
+                    if (!string.IsNullOrWhiteSpace(_appData.GetDescription))
+                    {
+                        Console.WriteLine($" Description: {_appData.GetDescription}");
+                    }
+
+                    // Verifica a inserção e valida o parametro 'urlProfile'
+                    if (!string.IsNullOrWhiteSpace(_appData.GetProfileURL))
+                    {
+                        Console.WriteLine($" Dev: {_appData.GetProfileURL}");                       
+                    }
+
+                    // Verifica a inserção e valida o parametro 'urlRepositorie'
+                    if (!string.IsNullOrWhiteSpace(_appData.GetRepositorieURL))
+                    {
+                        Console.WriteLine($" Repositório: {_appData.GetRepositorieURL}");                                            
+                    }
+
+                    Console.WriteLine("-----------------------------------------------------------------------------\n");
                 }
+
+                
+
+                /*AppScreenLetter.Init();
+
+                if (ActiveScreenLetter) 
+                {
+                    Console.WriteLine("");
+                    AppScreenLetter.DrawString($" {_appData.GetAppName}");
+                    Console.WriteLine("----------------------------------------------------------------------------");
+                    Console.WriteLine($" {_appData.GetAppName}");
+                    Console.WriteLine($" Version: {_appData.GetVersionNumber}");
+                    Console.WriteLine($" Description: {_appData.GetDescription}");
+                    Console.WriteLine($" Dev: {_appData.GetProfileURL}");
+                    Console.WriteLine($" Repositório: {_appData.GetRepositorieURL}");
+                    Console.WriteLine("-----------------------------------------------------------------------------\n");
+                }*/
 
             }
             catch (Exception exception)

@@ -9,6 +9,8 @@ namespace ganchito.Prompito.Interfaces
 {
     interface IExecuter
     {
+
+        public bool DEBUG_MODE { get; set; }
         public void Init() 
         {
             
