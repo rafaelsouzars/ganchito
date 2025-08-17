@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * 
+ * Ganchito
+ * Version: v1.0.0
+ * Description: Utilitário de git hooks
+ * Author: rafaelsouzars
+ * Github: https://github.com/rafaelsouzars
+ * 
+ */
+using System;
 using ganchito.Prompito;
 using ganchito.Prompito.ActionCommands;
 
@@ -7,9 +16,8 @@ namespace ganchito
     class Program
     {
         static void Main(string[] args)
-        {         
+        {           
             
-            // CONCLUÍDO...
             var app = new Executer();           
 
             app.InsertAppData(

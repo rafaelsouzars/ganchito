@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * 
+ * Ganchito
+ * Version: v1.0.0
+ * Description: Utilitário de git hooks
+ * Author: rafaelsouzars
+ * Github: https://github.com/rafaelsouzars
+ * 
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +17,12 @@ using ganchito.src.Hooks.AbstractClasses;
 
 namespace ganchito.src.Hooks.Classes
 {
+    /// <summary>
+    /// Class HookFiles(). Fornece rotinas de manipulação dos arquivos de hook do Git.
+    /// </summary>
+    /// <param name="operadores"></param>
+    /// <param name="tipoResolucao"></param>
+    /// <returns>Lista de operadores tipada.</returns>    
     class HookFiles : AbstractHookFilesBase
     {        
         private string _gitHookDirectory = $@"{Directory.GetCurrentDirectory()}\.git\hooks";
@@ -17,7 +32,10 @@ namespace ganchito.src.Hooks.Classes
         public string GetGitHookDirectory { get => _gitHookDirectory; }
         public string GetFileCommitMsg { get => _fileCommitMsg; }
 
-
+        /// <summary>
+        /// Método GitHookDirectoryExist(). Verifica se o diretorio .git\hooks existe.
+        /// </summary>
+        /// <returns>Valor booleano</returns>
         public override bool GitHookDirectoryExist()
         {
             bool result = false;
@@ -42,6 +60,11 @@ namespace ganchito.src.Hooks.Classes
             return result;
 
         }
+
+        /// <summary>
+        /// Método FileExist(). Verifica se o arquivo 'commit-msg' existe.
+        /// </summary>
+        /// <returns>Valor booleano</returns>    
         public override bool FileExist()
         {
             bool result = false;
@@ -62,31 +85,60 @@ namespace ganchito.src.Hooks.Classes
             return result;
         }
 
+        /// <summary>
+        /// Método FileExist(string fileName). Sem implementação.
+        /// </summary>
+        /// <param name="fileName"></param>        
+        /// <returns>Valor booleano</returns>        
         public override bool FileExist(string fileName)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Método FileRepositorieExist(). Sem implementação.
+        /// </summary>
+        /// <param name="fileName"></param>        
+        /// <returns>Valor booleano</returns> 
         public override bool FileRepositorieExist()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Método FileRepositorieExist(string fileName). Sem implementação.
+        /// </summary>
+        /// <param name="fileName"></param>        
+        /// <returns>Valor booleano</returns> 
         public override bool FileRepositorieExist(string fileName)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Método CreateFileRepositorieStream(). Sem implementação.
+        /// </summary>                
+        /// <returns>String</returns> 
         public override string CreateFileRepositorieStream()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Método FileExist(string fileName). Sem implementação.
+        /// </summary>
+        /// <param name="repositorieURL"></param>        
+        /// <returns>Valor booleano</returns> 
         public override string CreateFileRepositorieStream(string repositorieURL)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Método CreateHookFile(). Cria o arquivo de commits semânticos.
+        /// </summary>        
+        /// <returns>Valor booleano</returns>
+        /// <remarks>Deve ser implementado em cada classe derivada.</remarks>
         public override bool CreateHookFile()
         {
             bool result = false;
@@ -221,6 +273,11 @@ namespace ganchito.src.Hooks.Classes
             return result;
         }
 
+        /// <summary>
+        /// Método CreateHookFile(string fileStream). Sem implementação.
+        /// </summary>
+        /// <param name="fileStream"></param>        
+        /// <returns>Valor booleano</returns> 
         public override bool CreateHookFile(string fileStream)
         {
             throw new NotImplementedException();
