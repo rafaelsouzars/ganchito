@@ -21,22 +21,22 @@ using System.Threading.Tasks;
 using ganchito.Prompito.Interfaces;
 using ganchito.Prompito.Classes;
 using ganchito.Prompito.ConsoleScreen;
+using ganchito.Prompito.ActionCommands;
 
 namespace ganchito.Prompito
 {
 
     class Executer : IExecuter
-    {
-        private static bool _init = false;
+    {        
         private static object _appData;
         private static bool _DEBUG_MODE = false;
         private static Dictionary<string,(string,ActionCommand)> _receives = new Dictionary<string,(string, ActionCommand)>();
 
-        public static bool DEBUG_MODE { get => _DEBUG_MODE; set { _DEBUG_MODE = value; } }
+        public bool DEBUG_MODE { get => _DEBUG_MODE; set { _DEBUG_MODE = value; } }
 
         public Executer ()
         {
-            this.Init();
+            
         }
         
 
@@ -51,8 +51,7 @@ namespace ganchito.Prompito
         private void Init() 
         {
             var p = new Program();
-            //_receives.Add(p.ToString().Replace(".Program",""),"",new ActionCommand());
-            _init = true;
+            this.AddCommand(p.ToString().Replace(".Program",""),"",new ActionGanchito());            
         }
 
         public void InsertAppData(object appData)          
@@ -81,27 +80,23 @@ namespace ganchito.Prompito
         public void ExecuteCommand(string[] args) 
         {
             try 
-            {
-                if (_init == true) 
+            {                
+                if (args.Length >= 1)
                 {
-                    if (args.Length >= 1)
+                    if (_receives.Keys.Contains<string>(args[0]))
                     {
                         if (_receives.TryGetValue(args[0], out (string, ActionCommand) receiver))
                         {
                             var command = new Command<ActionCommand>(receiver.Item2, r => r.Run(args));
                             command.Execute();
-                        }                        
+                        }
                     }
-                    else
+                    else 
                     {
-                        Console.WriteLine("{0} Arguments", args.Length);
+                        throw new ArgumentException("\tMessage: Commando não reconhecido\n");    
                     }
-                }
-                else 
-                {
-                    Console.WriteLine("Inicie o Executer com o metodo '.Init()'");
-                }
-                
+                                            
+                }                               
                 
             }
             catch (Exception exception) 
