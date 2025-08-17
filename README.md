@@ -13,21 +13,18 @@ Utilitario de git hooks.
 O _Ganchito_ facilita a criação do arquivos commit-msg adicionando regras de commits semânticos.
 
 ## Instalação
-Pode ser via [Scoop](https://scoop.sh)
-1. Instale o Scoop
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-```
-2. Instale o Ganchito
-```powershell
-scoop bucket add https://github.com/rafaelsouzars/Bucket
-scoop install ganchito
-```
-Ou pode ser feita a instalação manual baixando os binarios no repositorio clicando [aqui](https://github.com/rafaelsouzars/ganchito/releases)
+Baixe manualmente o binário no repositorio clicando [aqui](https://github.com/rafaelsouzars/ganchito/releases)
 1. Baixe o binário
 ```
 https://github.com/rafaelsouzars/ganchito/releases
+```
+2. Descompacte a aplica ção em uma pasta
+```
+Exemplo: ..\ganchito\<arquivos>
+```
+3. Configure a variável de ambiente PATH inserindo o caminho da apliação
+```
+Exemplo: C:\user\ganchito
 ```
 
 ## Tutorial
