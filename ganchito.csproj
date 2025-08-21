@@ -2,12 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>rafaelsouzars</Authors>
     <Description>Utilitário para edição de git hooks.</Description>
     <PackageProjectUrl>https://github.com/rafaelsouzars/ganchito</PackageProjectUrl>
     <RepositoryUrl>https://github.com/rafaelsouzars/ganchito</RepositoryUrl>
     <PackageTags>git; github; git-hooks;</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
