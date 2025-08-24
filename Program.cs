@@ -23,7 +23,7 @@ namespace ganchito
             app.InsertAppData(
                 new {
                     AppName = "",
-                    Version = "v1.0.0",
+                    Version = "v1.1.0",
                     Description = "Utilitário de Git Hook",
                     ProfileURL = "https://github.com/rafasouzars",
                     RepositorieURL = "https://github.com/rafaelsouzars/ganchito"
