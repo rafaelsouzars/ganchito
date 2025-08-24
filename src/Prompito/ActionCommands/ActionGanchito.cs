@@ -25,18 +25,37 @@ namespace ganchito.Prompito.ActionCommands
         public override void Run(string[] args)
         {            
             try
-            {       
+            {
                 var hookFiles = new HookFiles();
 
-                if (hookFiles.GitHookDirectoryExist())
+                if (args.Length == 1) 
                 {
-                    hookFiles.CreateHookFile();
-                }                
+                    if (hookFiles.GitHookDirectoryExist())
+                    {
+                        hookFiles.CreateHookFile();
+                    } 
+                }
+                else if (args.Length == 2) 
+                {
+                    if (string.Equals(args[1],"-r")) 
+                    {
+                        hookFiles.CreateHookFile(hookFiles.CreateFileRepositorieStream()); 
+                    }
+                    else 
+                    {
+                        throw new ArgumentException("Argumento não reconhecido: ", args[1]);
+                    }
+                }
+                else if (args.Length > 2) 
+                {
+                    throw new ArgumentException("Argumentos não reconhecidos: ", args.ToString());
+                }
+                                
                
             }
             catch (Exception exception) 
             {
-                Console.WriteLine("ERROR: {0}",exception);
+                Console.WriteLine(" [ ERROR ]\n\t{0}",exception.Message);
             }
         }
     }

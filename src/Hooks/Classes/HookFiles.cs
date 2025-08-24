@@ -14,6 +14,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using ganchito.src.Hooks.AbstractClasses;
+using System.Net.Http;
+using System.Net.NetworkInformation;
 
 namespace ganchito.src.Hooks.Classes
 {
@@ -31,6 +33,54 @@ namespace ganchito.src.Hooks.Classes
 
         public string GetGitHookDirectory { get => _gitHookDirectory; }
         public string GetFileCommitMsg { get => _fileCommitMsg; }
+
+        private async Task<string> RequestRepositorieScriptFile(string scriptFileURL) 
+        {
+            using (var httpClient = new HttpClient())
+            {
+                try 
+                {
+                    // Requisita o arquivo de script no repositório online
+                    string shellScript = await httpClient.GetStringAsync(scriptFileURL);
+                    return shellScript;
+                }
+                catch (HttpRequestException exception) 
+                {
+                    // Retorna um erro caso o arquivo não exista
+                    Console.WriteLine(" [ ERROR ]\n\tErro ao requisitar a URL: {0}", exception.Message);
+                    return null;
+                }
+            }
+        }
+
+        private bool VerifyNetworkConnect() 
+        {
+            if (NetworkInterface.GetIsNetworkAvailable()) 
+            {
+                string host = "8.8.8.8"; // Script repositorie URL
+
+                using (Ping pingSend = new Ping()) 
+                {
+                    PingReply pingReply = pingSend.Send(host);
+
+                    // Return true, if ping status success
+                    if (pingReply.Status == IPStatus.Success) 
+                    {
+                        return true;
+                    }
+                    else 
+                    {
+                        return false;
+                    }
+                }
+                    
+            }
+            else 
+            {
+                // Case false, not network available return
+                return false;
+            }                
+        }
 
         /// <summary>
         /// Método GitHookDirectoryExist(). Verifica se o diretorio .git\hooks existe.
@@ -102,7 +152,7 @@ namespace ganchito.src.Hooks.Classes
         /// <returns>Valor booleano</returns> 
         public override bool FileRepositorieExist()
         {
-            throw new NotImplementedException();
+            return VerifyNetworkConnect();                
         }
 
         /// <summary>
@@ -121,7 +171,29 @@ namespace ganchito.src.Hooks.Classes
         /// <returns>String</returns> 
         public override string CreateFileRepositorieStream()
         {
-            throw new NotImplementedException();
+            try 
+            {
+                if (FileRepositorieExist()) 
+                {
+                    var scriptFileURL = @"https://raw.githubusercontent.com/rafaelsouzars/githook-semantic-inspect-script/refs/heads/master/commit-msg.sh";
+            
+                    var script = RequestRepositorieScriptFile(scriptFileURL);
+
+                    //Console.WriteLine("Script do repositório criado com sucesso");
+                    return script.Result;
+                }
+                else 
+                {
+                    return null;
+                } 
+            }
+            catch (Exception exception) 
+            {
+                Console.WriteLine(" [ ERROR ]\n\t{0}", exception.Message);
+                return null;
+            }
+                      
+                //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -280,6 +352,42 @@ namespace ganchito.src.Hooks.Classes
         /// <returns>Valor booleano</returns> 
         public override bool CreateHookFile(string fileStream)
         {
+            bool result = false;
+
+            try
+            {
+                if (GitHookDirectoryExist())
+                {
+
+                    if (!FileExist())
+                    {
+                        string path = $@"{GetGitHookDirectory}\{GetFileCommitMsg}";
+
+                        // Criando o arquivo de Hook
+                        using (StreamWriter fileHook = new StreamWriter(path))
+                        {
+
+                            fileHook.WriteLine(fileStream);
+                        }
+
+                        Console.WriteLine(@" Success: Ganchito Semantic Commit Message Hook Create.");
+
+                        result = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine(" O hook já foi criado.\n");
+                    }
+
+
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(" [ ERROR ]\n\t{0}", exception.Message);
+            }
+
+            return result;
             throw new NotImplementedException();
         }
     }

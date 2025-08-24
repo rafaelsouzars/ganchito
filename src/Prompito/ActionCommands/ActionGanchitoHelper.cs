@@ -20,8 +20,9 @@ namespace ganchito.Prompito.ActionCommands
     {
         public override void Run(string[] args)
         {
-            Console.WriteLine(" [ AJUDA DO GANCHITO v1.0.0 ]\n");
+            Console.WriteLine(" [ AJUDA ]\n");
             Console.WriteLine("\tcommit - Cria o hook 'commit-msg' no diretorio '.git' do projeto.\n");
+            Console.WriteLine("\t    -r - Usa o script do repositório 'https://github.com/rafaelsouzars/githook-semantic-inspect-script'.\n\n");
             Console.WriteLine("\thelp   - Abre a ajuda do programa.\n");
         }
     }
