@@ -1,18 +1,13 @@
 ﻿/*
  * 
  * Ganchito
- * Version: v1.0.0
+ * Version: v1.1.0
  * Description: Utilitário de git hooks
  * Author: rafaelsouzars
  * Github: https://github.com/rafaelsouzars
  * 
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using ganchito.Prompito.AbstractClasses;
 
 namespace ganchito.Prompito.Classes

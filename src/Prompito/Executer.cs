@@ -1,7 +1,7 @@
 ﻿/*
  * 
  * Ganchito
- * Version: v1.0.0
+ * Version: v1.1.0
  * Description: Utilitário de git hooks
  * Author: rafaelsouzars
  * Github: https://github.com/rafaelsouzars
@@ -10,14 +10,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using ganchito.Prompito.Interfaces;
 using ganchito.Prompito.Classes;
 using ganchito.Prompito.ConsoleScreen;
-using ganchito.Prompito.ActionCommands;
+
 
 namespace ganchito.Prompito
 {
@@ -26,14 +22,29 @@ namespace ganchito.Prompito
     /// </summary>   
     class Executer : IExecuter
     {        
-        private static object _appData;
-        private static bool _DEBUG_MODE = false;
-        private static Dictionary<string,(string,ActionCommand)> _receives = new Dictionary<string,(string, ActionCommand)>();
+        private object _appData;
+        private bool _DEBUG_MODE = false;
+        private HelpCommand _appHelperActionCommand = new HelpCommand();
+        protected readonly Dictionary<string, string> _args = new Dictionary<string, string>();
+        private Dictionary<string,(string,ActionCommand)> _receives = new Dictionary<string,(string, ActionCommand)>();
 
-        public bool DEBUG_MODE { get => _DEBUG_MODE; set { _DEBUG_MODE = value; } }       
+        public bool DEBUG_MODE { get => _DEBUG_MODE; set { _DEBUG_MODE = value; } }
+        public Dictionary<string, string> Args
+        {
+            get
+            {
+                return _args;
+            }
+
+        }
+
+        public Executer() 
+        {
+            
+        }
         
 
-        private static void DebugMode(string message)
+        private void DebugMode(string message)
         {
             if (_DEBUG_MODE)
             {
@@ -78,11 +89,11 @@ namespace ganchito.Prompito
             try 
             {                
                 if (args.Length >= 1)
-                {
+                {                    
                     if (_receives.Keys.Contains<string>(args[0]))
                     {
                         if (_receives.TryGetValue(args[0], out (string, ActionCommand) receiver))
-                        {
+                        {                             
                             var command = new Command<ActionCommand>(receiver.Item2, r => r.Run(args));
                             command.Execute();
                         }
@@ -92,7 +103,19 @@ namespace ganchito.Prompito
                         throw new ArgumentException("\tMessage: Commando não reconhecido\n");    
                     }
                                             
-                }                               
+                }
+                else 
+                {
+                    if (_appHelperActionCommand != null) 
+                    {
+                        var command = new Command<HelpCommand>(_appHelperActionCommand, r => r.Run(_receives));
+                        command.Execute();
+                    }
+                    else 
+                    {
+                        Console.WriteLine("\tSem ação para este comando.\n\tUtilize o método AppHelperActionCommand() para adicionar a ajuda do programa.\n");
+                    }
+                }
                 
             }
             catch (Exception exception) 
@@ -107,9 +130,9 @@ namespace ganchito.Prompito
         /// </summary>
         /// <param name="commandName"></param>
         /// <param name="newCommand"></param>        
-        public void AddCommand(string commandName, ActionCommand newCommand)
+        public void AddCommand(string commandName, ActionCommand newActionCommand)
         {
-            _receives.Add(commandName, ("", newCommand));
+            _receives.Add(commandName, ("", newActionCommand));
         }
 
         /// <summary>
@@ -117,10 +140,10 @@ namespace ganchito.Prompito
         /// </summary>
         /// <param name="commandName"></param>
         /// <param name="newCommand"></param> 
-        public void AddCommand (string commandName , string description , ActionCommand newCommand) 
+        public void AddCommand (string commandName , string description , ActionCommand newActionCommand) 
         {
-            _receives.Add(commandName, ( description, newCommand ));
-        }
+            _receives.Add(commandName, ( description, newActionCommand ));
+        }        
 
         /// <summary>
         /// Método ScreenAbout. Ativa e desativa a tela do App.
