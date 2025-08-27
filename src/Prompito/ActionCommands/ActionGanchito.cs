@@ -1,7 +1,7 @@
 ﻿/*
  * 
  * Ganchito
- * Version: v1.0.0
+ * Version: v1.1.0
  * Description: Utilitário de git hooks
  * Author: rafaelsouzars
  * Github: https://github.com/rafaelsouzars
@@ -22,11 +22,28 @@ namespace ganchito.Prompito.ActionCommands
     class ActionGanchito : ActionCommand
     {
 
+        public ActionGanchito()
+        {            
+            AddFlag(
+                "-r",
+                "--repo-hook",
+                "Criar hook a partir de repositório de script"                
+                );
+
+            AddFlag(
+                "-h",
+                "--help",
+                "Ajuda do comando"
+                );
+        }
+
         public override void Run(string[] args)
         {            
             try
             {
+                InitArgumentsMapper(args);
                 var hookFiles = new HookFiles();
+                Console.WriteLine("Teste do get Arg: {0}", Arg.Count);
 
                 if (args.Length == 1) 
                 {
